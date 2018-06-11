@@ -46,12 +46,18 @@ void MainWindow::on_actionConnectToDatabase_triggered()
     }
     ConnectDatabaseDialog dialog(this);
     dialog.exec();
-    if(dialog.isOk())
+    while(dialog.isOk())
     {
-        m_databaseController->connectTo(dialog.result());
-        m_tableViewController->show();
-        this->setWindowTitle("Menadżer Klientów - " + dialog.result());
-        this->enableEdit();
+
+        if(m_databaseController->connectTo(dialog.result()))
+        {
+            m_tableViewController->show();
+            this->setWindowTitle("Menadżer Klientów - " + dialog.result());
+            this->enableEdit();
+            break;
+        }
+        dialog.setError();
+        dialog.exec();
     }
 
 

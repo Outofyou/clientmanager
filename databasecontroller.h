@@ -6,7 +6,7 @@ class DatabaseController
 public:
     DatabaseController();
     ~DatabaseController();
-    void connectTo(const QString& path);
+    bool connectTo(const QString& path);
     void disconnect();
     bool transaction();
     bool rollback();

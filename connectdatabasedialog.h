@@ -12,12 +12,13 @@ class ConnectDatabaseDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit ConnectDatabaseDialog(QWidget *parent = 0);
+    ConnectDatabaseDialog(QWidget *parent = 0, QString path = "");
     ~ConnectDatabaseDialog();
 
     bool isOk() const;
     QString result() const;
 
+    void setError();
 private slots:
     void on_buttons_accepted();
 

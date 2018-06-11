@@ -40,5 +40,6 @@ bool AddClientDialog::isOk() const
 
 void AddClientDialog::on_buttons_rejected()
 {
+    m_isOk = false;
     this->close();
 }

@@ -1,13 +1,14 @@
 #include "connectdatabasedialog.h"
 #include "ui_connectdatabasedialog.h"
 
-ConnectDatabaseDialog::ConnectDatabaseDialog(QWidget *parent) :
+ConnectDatabaseDialog::ConnectDatabaseDialog(QWidget *parent, QString path) :
     QDialog(parent, Qt::WindowSystemMenuHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint),
     ui(new Ui::ConnectDatabaseDialog),
     m_isOk(false)
 {
 
     ui->setupUi(this);
+    ui->databaseNameBox->setText(path);
 
 
 }
@@ -37,4 +38,9 @@ bool ConnectDatabaseDialog::isOk() const
 void ConnectDatabaseDialog::on_buttons_rejected()
 {
     this->close();
+}
+void ConnectDatabaseDialog::setError()
+{
+    m_isOk = false;
+    this->ui->error->setText("Podana nazwa bazy danych jest nieprawidłowa.");
 }

@@ -18,18 +18,36 @@ DatabaseController::~DatabaseController()
         m_database.close();
 }
 
-void DatabaseController::connectTo(const QString& path)
+bool DatabaseController::connectTo(const QString& path)
 {
     if(m_database.isOpen())
         m_database.close();
     m_database.setDatabaseName(path);
-    m_database.open();
-    QSqlQuery query;
-    query.exec("create table IF NOT EXISTS person "
-                  "(id INTEGER PRIMARY KEY, "
-                  "firstname varchar(20), "
-                  "lastname varchar(30), "
-                  "age integer)");
+    bool exists = false;
+    if(QFile::exists(path))
+        exists = true;
+    if(m_database.open())
+    {
+        if(exists){
+            QSqlQuery qr;
+            if (!qr.exec("SELECT * FROM person;"))
+            {
+                return false;
+            }
+        }
+        else
+        {
+            QSqlQuery query;
+            query.exec("create table IF NOT EXISTS person "
+                          "(id INTEGER PRIMARY KEY, "
+                          "firstname varchar(20), "
+                          "lastname varchar(30), "
+                          "age integer)");
+        }
+        return true;
+    }
+    else
+        return false;
 }
 
 void DatabaseController::disconnect()
