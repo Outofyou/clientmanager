@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/app/icons">
+        <file>res/Checkmark.png</file>
+        <file>res/Minus Large.png</file>
+        <file>res/Plus Large.png</file>
+        <file>res/X.png</file>
+        <file>res/Locked.png</file>
+        <file>res/Unlocked.png</file>
+        <file>res/unlock-small.png</file>
+        <file>res/No Entry.png</file>
+        <file>res/Ticket.png</file>
+    </qresource>
+</RCC>
